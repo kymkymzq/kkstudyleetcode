@@ -22,7 +22,7 @@ import java.util.List;
  */
 
 class Leetcode46 {
-    public List<List<Integer>> permute(int[] nums) {
+    public static List<List<Integer>> permute(int[] nums) {
         if(nums.length == 0){
             return new ArrayList<>();
         }
@@ -31,12 +31,13 @@ class Leetcode46 {
         List<Integer> temp = new ArrayList<>();
         boolean[] visited = new boolean[nums.length];
 
-        dfs(nums, 0, temp, res, visited);
+        dfs(temp, res, nums, 0, visited);
         return res;
 
     }
 
-    public void dfs(int[] nums, int index, List<Integer> temp, List<List<Integer>> res, boolean[] visited){
+//    public static void dfs(int[] nums, int index, List<Integer> temp, List<List<Integer>> res, boolean[] visited){
+    public static void dfs(List<Integer> temp, List<List<Integer>> res, int[] nums, int index, boolean[] visited){
         if(index == nums.length){
             res.add(new ArrayList<>(temp));
             return;
@@ -48,12 +49,21 @@ class Leetcode46 {
             }
             visited[i] = true;
             temp.add(nums[i]);
-            dfs(nums, index + 1, temp, res, visited);
+            dfs(temp, res, nums, index + 1, visited);//index + 1 :因为每次取完一个数，下一次dfs是从下一个数开始取
             visited[i] = false;
             temp.remove(temp.size() - 1);
 
         }
 
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {1, 2, 3};
+        List<List<Integer>> permute = permute(nums);
+        System.out.println(permute);
+        /*
+        [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]
+         */
     }
 
 }
