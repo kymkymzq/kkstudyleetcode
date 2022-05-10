@@ -49,14 +49,15 @@ class LeetCode47 {
             return;
         }
         
-        for(int i = 0; i < nums.length; i++){
-            if(visited[i] || (i > 0 && !visited[i - 1] && nums[i] == nums[i - 1])){
-                continue;
+        for(int i = 0; i < nums.length; i++){    //for是横向找:找同一层的兄弟;
+            if(visited[i] || (i > 0 && !visited[i - 1] && nums[i] == nums[i - 1])){ //visited[i]代表这个数被访问过
+                continue;    //nums[i] == nums[i - 1] : 代表nums[i]和nums[i - 1]值相同
+                             //!visited[i - 1] : 代表nums[i - 1]在此结果中没有被访问。因此nums[i]开始的结果一定是重复的(nums[i],nums[i - 1]在同一层)
             }
 
             visited[i] = true;
             temp.add(nums[i]);
-            dfs(temp, res, nums, index + 1, visited);
+            dfs(temp, res, nums, index + 1, visited); //而dfs是纵向找,找同一个枝上的结果
             visited[i] = false;
             temp.remove(temp.size() - 1);
         }
