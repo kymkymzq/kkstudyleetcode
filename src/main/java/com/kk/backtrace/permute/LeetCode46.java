@@ -43,7 +43,7 @@ class LeetCode46 {
             return;
         }
 
-        for(int i = 0; i < nums.length; i++){
+        for(int i = 0; i < nums.length; i++){ //全排列需要每次都从0开始,因为即使从后面的数开始,也会选到前面的排列,所以利用visit[i]做判断是否访问过。
             if(visited[i]){
                 continue;
             }

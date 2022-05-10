@@ -48,7 +48,8 @@ class LeetCode47 {
             res.add(new ArrayList<>(temp));
             return;
         }
-        
+
+        //全排列需要每次都从0开始,因为即使从后面的数开始,也会选到前面的排列,所以利用visit[i]做判断是否访问过。
         for(int i = 0; i < nums.length; i++){    //for是横向找:找同一层的兄弟;
             if(visited[i] || (i > 0 && !visited[i - 1] && nums[i] == nums[i - 1])){ //visited[i]代表这个数被访问过
                 continue;    //nums[i] == nums[i - 1] : 代表nums[i]和nums[i - 1]值相同
