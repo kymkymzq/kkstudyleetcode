@@ -1,4 +1,4 @@
-package com.kk.algorithm.backtrace;
+package com.kk.backtrace.permute;
 
 import java.util.ArrayList;
 import java.util.List;
