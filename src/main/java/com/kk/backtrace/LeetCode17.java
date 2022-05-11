@@ -63,7 +63,7 @@ class LeetCode17 {
         }
         char curChar = digits.charAt(index);
         String curString = hashmap.get(curChar);
-        for(int i = 0; i < curString.length(); i++){  //树的每一层是从curDigit对应的curString中选
+        for(int i = 0; i < curString.length(); i++){  //树的每一层是从curChar对应的curString中选
             temp.append(curString.charAt(i));
             dfs(temp, res, digits, hashmap, index + 1);
             temp.deleteCharAt(temp.length() - 1);
