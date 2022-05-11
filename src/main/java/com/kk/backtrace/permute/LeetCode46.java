@@ -49,7 +49,7 @@ class LeetCode46 {
             }
             visited[i] = true;
             temp.add(nums[i]);
-            dfs(temp, res, nums, index + 1, visited);//index + 1 :因为每次取完一个数，下一次dfs是从下一个数开始取
+            dfs(temp, res, nums, index + 1, visited);//index + 1 :因为每个位置取完一个数，下一次dfs是从下一个位置开始取
             visited[i] = false;
             temp.remove(temp.size() - 1);
 
