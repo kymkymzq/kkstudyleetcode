@@ -18,54 +18,37 @@ package com.kk.dp;
  * s 仅由数字和英文字母组成
  */
 
-public class LeetCode5 {
-
+class LeetCode5 {
     public String longestPalindrome(String s) {
         int len = s.length();
-        if (len < 2) {
+        if(len < 2){
             return s;
         }
 
-        int maxLen = 1;
-        int begin = 0;
-        // dp[i][j] 表示 s[i..j] 是否是回文串
         boolean[][] dp = new boolean[len][len];
-        // 初始化：所有长度为 1 的子串都是回文串
-        for (int i = 0; i < len; i++) {
-            dp[i][i] = true;
-        }
+        //没写dp[i][i] = true; 不写也没问题,也可以AC
 
-        char[] charArray = s.toCharArray();
-        // 递推开始
-        // 先枚举子串长度
-        for (int L = 2; L <= len; L++) {
-            // 枚举左边界，左边界的上限设置可以宽松一些
-            for (int i = 0; i < len; i++) {
-                // 由 L 和 i 可以确定右边界，即 j - i + 1 = L 得
-                int j = L + i - 1;
-                // 如果右边界越界，就可以退出当前循环
-                if (j >= len) {
-                    break;
-                }
+        int maxLen = 1;
+        int maxIndex = 0;
 
-                if (charArray[i] != charArray[j]) {
+        for(int j = 1; j < len; j++){
+            for(int i = 0; i < j; i++){
+                if(s.charAt(i) != s.charAt(j)){
                     dp[i][j] = false;
-                } else {
-                    if (j - i < 3) {
+                }else{
+                    if(j - i + 1 <= 3){
                         dp[i][j] = true;
-                    } else {
+                    }else{
                         dp[i][j] = dp[i + 1][j - 1];
                     }
                 }
 
-                // 只要 dp[i][L] == true 成立，就表示子串 s[i..L] 是回文，此时记录回文长度和起始位置
-                if (dp[i][j] && j - i + 1 > maxLen) {
+                if(j - i + 1 > maxLen && dp[i][j]){
                     maxLen = j - i + 1;
-                    begin = i;
+                    maxIndex = i;
                 }
             }
         }
-        return s.substring(begin, begin + maxLen);
+        return s.substring(maxIndex, maxIndex + maxLen);
     }
 }
-
