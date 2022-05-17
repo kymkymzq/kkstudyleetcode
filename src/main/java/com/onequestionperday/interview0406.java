@@ -1,5 +1,8 @@
 package com.onequestionperday;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -9,6 +12,12 @@ package com.onequestionperday;
  *     TreeNode(int x) { val = x; }
  * }
  */
+  class TreeNode {
+      int val;
+      TreeNode left;
+      TreeNode right;
+      TreeNode(int x) { val = x; }
+  }
 
 /**
  * 面试题 04.06. 后继者
