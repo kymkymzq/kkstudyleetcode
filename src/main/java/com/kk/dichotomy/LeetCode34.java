@@ -57,13 +57,13 @@ class LeetCode34 {
                 right = mid - 1;
             }
         }
-        return left;
+        return left; //这里是left还是right都可以,因为在findFirstPosition()方法中,已经确认了一定至少存在一个数==target
     }
 
     public int findFirstPosition(int[] nums, int target) {
         int left = 0;
         int right = nums.length - 1;
-        while(left < right){
+        while(left < right){  //可以通过用例: nums = [5,7,7,8,8,10], target = 8 来查看为什么这里不带等号,带了等号会进入死循环.这个用例while结束后left=right.
             int mid = (left + right) >>> 1; //如果只有两个数字,这样求的结果是让中值变成第一个数
             if(nums[mid] < target){
                 left = mid + 1;
@@ -73,8 +73,8 @@ class LeetCode34 {
                 right = mid - 1;
             }
         }
-        if(nums[left] == target){
-            return left;
+        if(nums[left] == target){   //二分法一定要考虑边界条件:如: nums:[2,2], target = 1. 出了while()之后right = -1,小于left
+            return left;            //所以这里只能return left,不能return right。
         }
         return -1;
     }
