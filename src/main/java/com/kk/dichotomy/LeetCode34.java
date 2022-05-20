@@ -21,8 +21,8 @@ package com.kk.dichotomy;
  * 输入：nums = [], target = 0
  * 输出：[-1,-1]
  *
- *
  * 提示：
+ *
  * 0 <= nums.length <= 105
  * -109 <= nums[i] <= 109
  * nums 是一个非递减数组
@@ -35,9 +35,9 @@ class LeetCode34 {
             return new int[]{-1, -1};
         }
         int firstPosition = findFirstPosition(nums, target);
-        if(firstPosition == -1){
-            return new int[]{-1, -1};
-        }
+        // if(firstPosition == -1){
+        //     return new int[]{-1, -1};
+        // }
         int lastPosition = findLastPosition(nums, target);
         
         return new int[]{firstPosition, lastPosition};
@@ -47,35 +47,38 @@ class LeetCode34 {
     public int findLastPosition(int[] nums, int target) {
         int left = 0;
         int right = nums.length - 1;
-        while(left < right){
-            int mid = (left + right + 1) >>> 1; //这种取终值很经典,如果只有两个数字,这样求的结果可以让中值变成第二个数
+        while(left <= right){
+            int mid = (left + right + 1) >>> 1;
             if(nums[mid] < target){
                 left = mid + 1;
-            }else if(nums[mid] == target){
-                left = mid;
-            }else{
+            }else if(nums[mid] > target){
                 right = mid - 1;
+            }else{
+                left = mid + 1;
             }
         }
-        return left; //这里是left还是right都可以,因为在findFirstPosition()方法中,已经确认了一定至少存在一个数==target
+        if(right < 0 || nums[right] != target){
+            return -1;
+        }
+        return right;
     }
 
     public int findFirstPosition(int[] nums, int target) {
         int left = 0;
         int right = nums.length - 1;
-        while(left < right){  //可以通过用例: nums = [5,7,7,8,8,10], target = 8 来查看为什么这里不带等号,带了等号会进入死循环.这个用例while结束后left=right.
-            int mid = (left + right) >>> 1; //如果只有两个数字,这样求的结果是让中值变成第一个数
+        while(left <= right){
+            int mid = (left + right) >>> 1;
             if(nums[mid] < target){
                 left = mid + 1;
-            }else if(nums[mid] == target){
-                right = mid;
+            }else if(nums[mid] > target){
+                right = mid - 1;
             }else{
                 right = mid - 1;
             }
         }
-        if(nums[left] == target){   //二分法一定要考虑边界条件:如: nums:[2,2], target = 1. 出了while()之后right = -1,小于left
-            return left;            //所以这里只能return left,不能return right。
+        if(left >= nums.length || nums[left] != target){
+            return -1;
         }
-        return -1;
+        return left;
     }
 }
