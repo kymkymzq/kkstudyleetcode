@@ -1,4 +1,4 @@
-package com.kk.dichotomy;
+package com.kk.dichotomy.budaidenghao;
 
 /**
  * 222. 完全二叉树的节点个数 https://leetcode.cn/problems/count-complete-tree-nodes/
@@ -45,7 +45,7 @@ class LeetCode222 {
         }
         int low = 1 << level;
         int high = (1 << (level + 1)) - 1;
-        while (low < high) {
+        while (low < high) { //不带等号
             int mid = (low + high + 1) >>> 1;
             if (exists(root, mid, level)) {
                 low = mid;
